@@ -7,7 +7,7 @@
   },
   "transport": {
     "type": "http",
-    "endpoint": "https://ekkoee.com/mcp"
+    "endpoint": "https://www.ekkoee.com/mcp"
   },
   "capabilities": {
     "tools": [],

@@ -8,7 +8,7 @@ import type { MetadataRoute } from 'next'
  * Do NOT include /portal/* or /admin/* routes (private).
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://ekkoee.com'
+  const baseUrl = 'https://www.ekkoee.com'
   const now = new Date()
 
   return [

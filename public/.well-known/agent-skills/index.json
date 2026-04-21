@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "publisher": {
     "name": "ekkoee",
-    "url": "https://ekkoee.com",
+    "url": "https://www.ekkoee.com",
     "contact": "hello@ekkoee.com"
   },
   "skills": [
@@ -11,7 +11,7 @@
       "name": "ekkoee-platform-overview",
       "type": "documentation",
       "description": "ekkoee is a factory AI platform that deploys local LLMs and AI agents to manufacturing companies. The platform uses a hybrid cloud + edge architecture where sensitive factory data stays on-premise (air-gapped GPU servers) while a cloud dashboard provides monitoring and orchestration. Unlike traditional ERP, ekkoee positions itself as a 'Mini-AGI' layer for factories.",
-      "url": "https://ekkoee.com/",
+      "url": "https://www.ekkoee.com/",
       "tags": [
         "manufacturing",
         "industrial-ai",
@@ -25,7 +25,7 @@
       "name": "ekkoee-trust-framework",
       "type": "documentation",
       "description": "ekkoee's red/yellow/green data zoning framework for factory AI. Red zone (recipes, customer pricing, financials) never leaves the factory. Yellow zone (SOPs, contracts) uses local LLMs with audit trails. Green zone (public specs, regulations) can use cloud AI. RAG over factory data, not fine-tuning.",
-      "url": "https://ekkoee.com/#trust",
+      "url": "https://www.ekkoee.com/#trust",
       "tags": [
         "data-governance",
         "privacy",
@@ -37,7 +37,7 @@
       "name": "ekkoee-engagement-model",
       "type": "documentation",
       "description": "How to engage ekkoee for a factory AI deployment. The engagement starts with an AI Enterprise Health Check to identify pain points, followed by custom agent development and local hardware deployment. Ongoing monthly fees cover platform access, model maintenance, and technical support.",
-      "url": "https://ekkoee.com/#process",
+      "url": "https://www.ekkoee.com/#process",
       "tags": [
         "consulting",
         "engagement",

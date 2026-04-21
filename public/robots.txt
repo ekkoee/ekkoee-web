@@ -81,5 +81,5 @@ Content-Signal: ai-train=no, search=yes, ai-input=yes
 # ============================================
 # Sitemap & Host
 # ============================================
-Sitemap: https://ekkoee.com/sitemap.xml
-Host: https://ekkoee.com
+Sitemap: https://www.ekkoee.com/sitemap.xml
+Host: https://www.ekkoee.com
