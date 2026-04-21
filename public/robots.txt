@@ -1,0 +1,85 @@
+# ekkoee.com robots.txt
+# Last updated: 2026-04-21
+
+# ============================================
+# General crawlers — allow public pages only
+# ============================================
+User-agent: *
+Allow: /
+Disallow: /portal/
+Disallow: /admin/
+Disallow: /api/
+Disallow: /login
+
+# ============================================
+# AI Search / RAG bots — allow (for brand discovery)
+# ============================================
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /portal/
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /portal/
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /portal/
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /portal/
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /portal/
+Disallow: /admin/
+Disallow: /api/
+
+# ============================================
+# AI Training bots — DISALLOW
+# (We allow search indexing but not model training)
+# ============================================
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+# ============================================
+# Content Signals — declare AI usage preferences
+# See: https://contentsignals.org
+# ai-train=no  : do not use for model training
+# search=yes   : allow AI search indexing
+# ai-input=yes : allow real-time AI assistant context
+# ============================================
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+# ============================================
+# Sitemap & Host
+# ============================================
+Sitemap: https://ekkoee.com/sitemap.xml
+Host: https://ekkoee.com

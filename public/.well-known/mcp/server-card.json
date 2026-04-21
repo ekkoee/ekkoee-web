@@ -1,0 +1,18 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schemas/server-card/v1.json",
+  "serverInfo": {
+    "name": "ekkoee",
+    "version": "0.1.0",
+    "description": "ekkoee factory AI platform — MCP server (planned)"
+  },
+  "transport": {
+    "type": "http",
+    "endpoint": "https://ekkoee.com/mcp"
+  },
+  "capabilities": {
+    "tools": [],
+    "resources": [],
+    "prompts": []
+  },
+  "_comment": "This is a placeholder server card. When the ekkoee MCP server ships, populate capabilities.tools with the actual tool definitions (e.g. get_factory_status, list_agents, query_daily_stats)."
+}
