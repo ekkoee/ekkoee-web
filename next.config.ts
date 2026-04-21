@@ -19,13 +19,6 @@ const nextConfig: NextConfig = {
       },
       // Correct content-type for well-known files
       {
-        source: "/.well-known/api-catalog",
-        headers: [
-          { key: "Content-Type", value: "application/linkset+json" },
-          { key: "Cache-Control", value: "public, max-age=3600" },
-        ],
-      },
-      {
         source: "/.well-known/agent-skills/index.json",
         headers: [
           { key: "Content-Type", value: "application/json" },
