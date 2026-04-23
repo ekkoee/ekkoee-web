@@ -292,6 +292,24 @@ export default function HomeOrbit() {
     };
   }, []);
 
+  // 外部(CyberpunkFrame 的 EKKOEE.COM 連結)可以 dispatch
+  // `ekkoee:go-home` 事件,orbit 會滑回 Hero(target = 0 的最近模)
+  useEffect(() => {
+    const onGoHome = () => {
+      const s = progress.current;
+      const now = performance.now();
+      s.tweenFrom = s.current;
+      // 找距離目前 target 最近的 HERO_IDX(0)模數倍數,避免繞遠路
+      const cycles = Math.round(s.target / SECTION_COUNT);
+      s.target = cycles * SECTION_COUNT; // = 0 (mod 8)
+      s.tweenStart = now;
+      s.tweenActive = true;
+      lastWheelTs.current = now;
+    };
+    window.addEventListener('ekkoee:go-home', onGoHome);
+    return () => window.removeEventListener('ekkoee:go-home', onGoHome);
+  }, []);
+
   // Hero breakthrough → orbit navigation
   const handleHeroPortal = useCallback((mode: PortalMode) => {
     const s = progress.current;

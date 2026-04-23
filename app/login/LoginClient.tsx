@@ -61,18 +61,19 @@ export default function LoginClient() {
         authenticate.
       </h1>
       <p
-        className="mb-8 text-bone-dim"
+        className="text-bone-dim"
         style={{
           fontFamily: 'var(--font-sans), "Noto Sans TC", sans-serif',
           fontSize: 13,
           lineHeight: 1.6,
+          marginBottom: 56, // 與下方 FACTORY ID 欄位拉開明顯空隙
         }}
       >
         以工廠識別碼 + 當期一次性 passcode 登入。未申請存取者請使用
         首頁 <Link href="/" style={{ color: '#FFB938', textDecoration: 'underline', textDecorationStyle: 'dashed', textUnderlineOffset: 3 }}>CONTACT</Link> 聯繫。
       </p>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form onSubmit={handleSubmit} className="space-y-6">
         <label className="block">
           <span
             className="mb-2 block"
@@ -90,7 +91,7 @@ export default function LoginClient() {
             type="text"
             value={factoryId}
             onChange={(e) => setFactoryId(e.target.value)}
-            placeholder="e.g. CAMPTEC-TW-01"
+            placeholder="e.g. TSMC"
             disabled={state === 'sending'}
             style={{
               width: '100%',

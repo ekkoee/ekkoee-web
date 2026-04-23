@@ -1,3 +1,5 @@
+'use client';
+
 // =====================================================================
 // (home) / Mission - bg-void(和 Manifesto / Process 同底)
 // Port 自 legacy components/home/Mission.tsx,加 terminal label。
@@ -5,7 +7,10 @@
 // 復用 globals.css 裡的 .mission-claim / .strike / .win / .mission-prose
 // =====================================================================
 
+import { useI18n } from '@/lib/i18n/I18nProvider';
+
 export default function Mission() {
+  const { t } = useI18n();
   return (
     <section
       id="mission"
@@ -31,20 +36,21 @@ export default function Mission() {
               animation: 'cpf-blink 2s ease-in-out infinite',
             }}
           />
-          <span>[ 02 / MISSION ]</span>
+          <span>{t.mission.tag}</span>
         </div>
 
         <h2 className="mission-claim">
-          We don&apos;t <span className="strike">sell ERP.</span>
+          {t.mission.claimDont}
+          <span className="strike">{t.mission.claimStrike}</span>
           <br />
-          We <span className="win">grow Mini-AGIs.</span>
+          {t.mission.claimWe}
+          <span className="win">{t.mission.claimWin}</span>
         </h2>
 
         <p className="mission-prose">
-          多數軟體告訴工廠該做什麼。ekkoee 打造的是一個會
-          <strong>一起思考</strong>的智慧。一座工廠,一套 AI 神經系統 —
-          就地生長、從你的地板學、永遠屬於你。沒有 SaaS 綁架、沒有
-          矽谷陳腔濫調。只有一個比你 ERP 更了解你機器的 agent。
+          {t.mission.prosePre}
+          <strong>{t.mission.proseStrong}</strong>
+          {t.mission.prosePost}
         </p>
       </div>
     </section>

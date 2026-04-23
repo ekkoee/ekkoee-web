@@ -10,8 +10,11 @@
 // =====================================================================
 
 import Link from 'next/link';
+import LangSwitcher from '@/components/ui/LangSwitcher';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 export default function CyberpunkFrame() {
+  const { t } = useI18n();
   return (
     <>
       {/* scan sweep */}
@@ -69,24 +72,45 @@ export default function CyberpunkFrame() {
           color: 'rgba(235, 230, 215, 0.55)',
         }}
       >
-        <div className="pointer-events-none flex items-center gap-3">
+        <div className="flex items-center gap-3">
           <span
             aria-hidden
-            className="inline-block h-[6px] w-[6px] rounded-full"
+            className="pointer-events-none inline-block h-[6px] w-[6px] rounded-full"
             style={{
               background: 'var(--color-terminal, #00ff88)',
               boxShadow: '0 0 8px rgba(0, 255, 136, 0.6)',
               animation: 'cpf-blink 2s ease-in-out infinite',
             }}
           />
-          <span>EKKOEE.COM</span>
-          <span style={{ color: 'rgba(235, 230, 215, 0.25)' }}>{'//'}</span>
-          <span style={{ color: 'rgba(255, 185, 56, 0.75)' }}>
-            MINI-AGI FOR MANUFACTURING
+          <Link
+            href="/"
+            aria-label="ekkoee.com — back to home"
+            className="transition-colors hover:text-bone focus:text-bone focus:outline-none"
+            style={{
+              color: 'rgba(235, 230, 215, 0.75)',
+              textDecoration: 'none',
+              letterSpacing: '0.25em',
+            }}
+            onClick={() => {
+              // 在 / 上按已經不會 route 換頁,所以順便通知 HomeOrbit 滑回 Hero
+              if (typeof window !== 'undefined') {
+                window.dispatchEvent(new CustomEvent('ekkoee:go-home'));
+              }
+            }}
+          >
+            {t.hud.wordmark}
+          </Link>
+          <span className="pointer-events-none" style={{ color: 'rgba(235, 230, 215, 0.25)' }}>{'//'}</span>
+          <span className="pointer-events-none" style={{ color: 'rgba(255, 185, 56, 0.75)' }}>
+            {t.hud.tagline}
           </span>
         </div>
         <div className="flex items-center gap-3">
-          <span className="pointer-events-none">NODE::23.4.168</span>
+          <span className="pointer-events-none">{t.hud.node}</span>
+          <span className="pointer-events-none" style={{ color: 'rgba(235, 230, 215, 0.25)' }}>
+            {'//'}
+          </span>
+          <LangSwitcher />
           <span className="pointer-events-none" style={{ color: 'rgba(235, 230, 215, 0.25)' }}>
             {'//'}
           </span>
@@ -99,7 +123,7 @@ export default function CyberpunkFrame() {
               letterSpacing: '0.25em',
             }}
           >
-            ▸ CLIENT LOGIN
+            {t.hud.clientLogin}
           </Link>
         </div>
       </div>
@@ -120,14 +144,14 @@ export default function CyberpunkFrame() {
         }}
       >
         <div className="flex items-center gap-3">
-          <span style={{ color: 'rgba(0, 255, 136, 0.75)' }}>SYS::LIVE</span>
+          <span style={{ color: 'rgba(0, 255, 136, 0.75)' }}>{t.hud.sysLive}</span>
           <span style={{ color: 'rgba(235, 230, 215, 0.25)' }}>{'//'}</span>
-          <span>AGENTS::05/07</span>
+          <span>{t.hud.agents}</span>
           <span style={{ color: 'rgba(235, 230, 215, 0.25)' }}>{'//'}</span>
-          <span style={{ color: 'rgba(255, 185, 56, 0.75)' }}>02 WARN</span>
+          <span style={{ color: 'rgba(255, 185, 56, 0.75)' }}>{t.hud.warn}</span>
         </div>
         <div>
-          <span>▼ SCROLL · DRAG · ZOOM</span>
+          <span>{t.hud.scrollHint}</span>
         </div>
       </div>
 

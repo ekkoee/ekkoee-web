@@ -8,6 +8,7 @@
 // =====================================================================
 
 import { useEffect, useState } from 'react';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 type LogTag = 'ok' | 'info' | 'warn' | 'err';
 type LogEntry = { ts: string; tag: LogTag; text: string };
@@ -37,6 +38,7 @@ function nowStr() {
 }
 
 export default function DashboardPreview() {
+  const { t } = useI18n();
   const [activeTab, setActiveTab] = useState<TabKey>('overview');
   const [det, setDet] = useState(2451);
   const [pass, setPass] = useState(98.7);
@@ -107,7 +109,7 @@ export default function DashboardPreview() {
               animation: 'cpf-blink 2s ease-in-out infinite',
             }}
           />
-          <span>[ 04 / LIVE SYSTEM ]</span>
+          <span>{t.dashboard.tag}</span>
         </div>
 
         {/* headline */}
@@ -122,7 +124,7 @@ export default function DashboardPreview() {
             lineHeight: 1.2,
           }}
         >
-          工廠的心跳,看得見
+          {t.dashboard.headline}
         </h2>
 
         {/* Dashboard frame — reuse legacy .dash-frame */}
@@ -134,22 +136,22 @@ export default function DashboardPreview() {
               <span className="tl-dot g" />
             </div>
             <div className="dash-title">
-              portal.ekkoee.com / camptec &middot; production floor
+              {t.dashboard.frameTitle}
             </div>
             <div>
-              <span className="hud-grn">● LIVE</span>
+              <span className="hud-grn">{t.dashboard.live}</span>
             </div>
           </div>
 
           <div className="dash-tabs">
-            {TABS.map((t) => (
+            {TABS.map((key) => (
               <button
-                key={t}
+                key={key}
                 type="button"
-                className={`tab${activeTab === t ? ' active' : ''}`}
-                onClick={() => setActiveTab(t)}
+                className={`tab${activeTab === key ? ' active' : ''}`}
+                onClick={() => setActiveTab(key)}
               >
-                {t.toUpperCase()}
+                {t.dashboard.tabs[key]}
               </button>
             ))}
           </div>
@@ -157,22 +159,22 @@ export default function DashboardPreview() {
           <div className="dash-body">
             <div className="stats-col">
               <div className="stat">
-                <div className="stat-label">PASS RATE</div>
+                <div className="stat-label">{t.dashboard.passRate}</div>
                 <div className="stat-value">
                   {pass.toFixed(1)}
                   <span className="unit">%</span>
                 </div>
-                <div className="stat-delta">▲ 2.1 vs last week</div>
+                <div className="stat-delta">{t.dashboard.passDelta}</div>
               </div>
               <div className="stat">
-                <div className="stat-label">ACTIVE AGENTS</div>
+                <div className="stat-label">{t.dashboard.activeAgents}</div>
                 <div className="stat-value">
                   6<span className="unit">/6</span>
                 </div>
-                <div className="stat-delta">all systems nominal</div>
+                <div className="stat-delta">{t.dashboard.activeAgentsSub}</div>
               </div>
               <div className="stat wide">
-                <div className="stat-label">DETECTIONS TODAY</div>
+                <div className="stat-label">{t.dashboard.detectionsToday}</div>
                 <div className="stat-value">{det.toLocaleString()}</div>
                 <svg className="spark" viewBox="0 0 200 32" preserveAspectRatio="none">
                   <polyline
@@ -184,16 +186,16 @@ export default function DashboardPreview() {
                 </svg>
               </div>
               <div className="stat wide">
-                <div className="stat-label">UPTIME &middot; 30d</div>
+                <div className="stat-label">{t.dashboard.uptime}</div>
                 <div className="stat-value">
                   99.97<span className="unit">%</span>
                 </div>
-                <div className="stat-delta">SLA target: 99.5%</div>
+                <div className="stat-delta">{t.dashboard.uptimeSla}</div>
               </div>
             </div>
 
             <div className="feed">
-              <div className="feed-head">AGENT LOG &middot; STREAM</div>
+              <div className="feed-head">{t.dashboard.agentLog}</div>
               <div className="feed-log">
                 {logs.map((l, i) => (
                   <div key={`${l.ts}-${i}-${l.text}`} className="log-line">

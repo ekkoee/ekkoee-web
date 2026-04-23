@@ -10,6 +10,7 @@
 
 import { useEffect, useState } from 'react';
 import HeroCanvas, { type PortalMode } from '@/components/hero/HeroCanvas';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 interface HeroProps {
   onPortalTrigger?: (mode: PortalMode) => void;
@@ -18,6 +19,7 @@ interface HeroProps {
 }
 
 export default function Hero({ onPortalTrigger, portalMode, onSkip }: HeroProps) {
+  const { t } = useI18n();
   const [hasShownHint, setHasShownHint] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -54,7 +56,7 @@ export default function Hero({ onPortalTrigger, portalMode, onSkip }: HeroProps)
             textTransform: 'uppercase',
           }}
         >
-          mini-agi for manufacturing
+          {t.hero.subtitle}
         </p>
         <button
           type="button"
@@ -66,7 +68,7 @@ export default function Hero({ onPortalTrigger, portalMode, onSkip }: HeroProps)
             letterSpacing: '0.3em',
           }}
         >
-          ↓ ENTER
+          {t.hero.enter}
         </button>
       </section>
     );
@@ -105,7 +107,7 @@ export default function Hero({ onPortalTrigger, portalMode, onSkip }: HeroProps)
             textTransform: 'uppercase',
           }}
         >
-          mini-agi for manufacturing
+          {t.hero.subtitle}
         </div>
       </div>
 
@@ -128,7 +130,7 @@ export default function Hero({ onPortalTrigger, portalMode, onSkip }: HeroProps)
               lineHeight: 1.6,
             }}
           >
-            SCROLL TO ENTER · DRAG TO ORBIT
+            {t.hero.scrollHint}
           </div>
           <div
             style={{
@@ -139,7 +141,7 @@ export default function Hero({ onPortalTrigger, portalMode, onSkip }: HeroProps)
               marginTop: 6,
             }}
           >
-            EITHER DIRECTION OPENS THE GATE
+            {t.hero.scrollHintSub}
           </div>
         </div>
       )}
@@ -154,7 +156,7 @@ export default function Hero({ onPortalTrigger, portalMode, onSkip }: HeroProps)
           letterSpacing: '0.3em',
         }}
       >
-        SKIP INTRO →
+        {t.hero.skipIntro}
       </button>
     </section>
   );

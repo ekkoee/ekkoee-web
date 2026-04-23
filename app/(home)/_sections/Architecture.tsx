@@ -8,6 +8,7 @@
 // =====================================================================
 
 import { useState } from 'react';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 const C = {
   bg: '#0A0A0C',
@@ -22,9 +23,10 @@ const C = {
 };
 
 type Zone = 'red' | 'yellow' | 'green';
+type NodeId = 'factory' | 'edge' | 'gateway' | 'cloud';
 
 interface ArchNode {
-  id: string;
+  id: NodeId;
   label: string;
   sub: string;
   x: number;
@@ -33,22 +35,22 @@ interface ArchNode {
   zone: Zone;
 }
 
-const NODES: ArchNode[] = [
-  { id: 'factory', label: 'YOUR FACTORY', sub: 'air-gapped · local GPU', x: 15, y: 70, color: C.rose, zone: 'red' },
-  { id: 'edge', label: 'EDGE.AGENT', sub: 'vision · scheduling · alert', x: 40, y: 70, color: C.amber, zone: 'yellow' },
-  { id: 'gateway', label: 'SECURE GATEWAY', sub: 'HTTPS · API key · masked', x: 60, y: 40, color: C.olive, zone: 'yellow' },
-  { id: 'cloud', label: 'EKKOEE.CLOUD', sub: 'portal · realtime · admin', x: 85, y: 40, color: C.green, zone: 'green' },
-];
-
-const EDGES: Array<{ from: string; to: string }> = [
+const EDGES: Array<{ from: NodeId; to: NodeId }> = [
   { from: 'factory', to: 'edge' },
   { from: 'edge', to: 'gateway' },
   { from: 'gateway', to: 'cloud' },
 ];
 
 export default function Architecture() {
-  const [hovered, setHovered] = useState<string | null>(null);
-  const getNode = (id: string) => NODES.find((n) => n.id === id) ?? NODES[0];
+  const { t } = useI18n();
+  const [hovered, setHovered] = useState<NodeId | null>(null);
+  const NODES: ArchNode[] = [
+    { id: 'factory', label: t.architecture.nodes.factory.label, sub: t.architecture.nodes.factory.sub, x: 15, y: 70, color: C.rose, zone: 'red' },
+    { id: 'edge', label: t.architecture.nodes.edge.label, sub: t.architecture.nodes.edge.sub, x: 40, y: 70, color: C.amber, zone: 'yellow' },
+    { id: 'gateway', label: t.architecture.nodes.gateway.label, sub: t.architecture.nodes.gateway.sub, x: 60, y: 40, color: C.olive, zone: 'yellow' },
+    { id: 'cloud', label: t.architecture.nodes.cloud.label, sub: t.architecture.nodes.cloud.sub, x: 85, y: 40, color: C.green, zone: 'green' },
+  ];
+  const getNode = (id: NodeId) => NODES.find((n) => n.id === id) ?? NODES[0];
 
   return (
     <section
@@ -75,7 +77,7 @@ export default function Architecture() {
               animation: 'cpf-blink 2s ease-in-out infinite',
             }}
           />
-          <span>[ 05 / ARCHITECTURE ]</span>
+          <span>{t.architecture.tag}</span>
         </div>
 
         <h2
@@ -88,7 +90,8 @@ export default function Architecture() {
             lineHeight: 1.2,
           }}
         >
-          hybrid. <span style={{ color: C.green }}>trust-first.</span>
+          {t.architecture.headlineA}
+          <span style={{ color: C.green }}>{t.architecture.headlineB}</span>
         </h2>
 
         <div
@@ -104,13 +107,13 @@ export default function Architecture() {
         >
           {/* zone bands */}
           <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '30%', background: 'rgba(191,78,107,0.04)', borderRight: `1px dashed ${C.line}` }}>
-            <div style={{ padding: 12, fontSize: 10, color: C.rose, letterSpacing: '0.2em' }}>● RED ZONE</div>
+            <div style={{ padding: 12, fontSize: 10, color: C.rose, letterSpacing: '0.2em' }}>{t.architecture.zoneRed}</div>
           </div>
           <div style={{ position: 'absolute', left: '30%', top: 0, bottom: 0, width: '40%', background: 'rgba(255,185,56,0.04)', borderRight: `1px dashed ${C.line}` }}>
-            <div style={{ padding: 12, fontSize: 10, color: C.amber, letterSpacing: '0.2em' }}>● YELLOW ZONE</div>
+            <div style={{ padding: 12, fontSize: 10, color: C.amber, letterSpacing: '0.2em' }}>{t.architecture.zoneYellow}</div>
           </div>
           <div style={{ position: 'absolute', left: '70%', top: 0, bottom: 0, width: '30%', background: 'rgba(0,255,136,0.04)' }}>
-            <div style={{ padding: 12, fontSize: 10, color: C.green, letterSpacing: '0.2em' }}>● GREEN ZONE</div>
+            <div style={{ padding: 12, fontSize: 10, color: C.green, letterSpacing: '0.2em' }}>{t.architecture.zoneGreen}</div>
           </div>
 
           {/* connections + packets */}
@@ -162,7 +165,7 @@ export default function Architecture() {
         </div>
 
         <div style={{ marginTop: 24, fontSize: 12, color: C.olive, textAlign: 'center' }}>
-          hover any node to see the data flow accelerate →
+          {t.architecture.hoverHint}
         </div>
       </div>
     </section>

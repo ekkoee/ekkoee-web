@@ -8,34 +8,7 @@
 // =====================================================================
 
 import { motion } from 'framer-motion';
-
-type Step = {
-  num: string;
-  label: string;
-  title: string;
-  body: string;
-};
-
-const STEPS: Step[] = [
-  {
-    num: '01',
-    label: '01 / DIAGNOSE',
-    title: '企業健檢',
-    body: '兩週,三次訪談。我們走進你的工廠,理解你的製程、痛點、和不想被碰的核心機密。產出一份診斷報告:哪些環節 AI 可以介入、哪些不該動、投入產出的預期。',
-  },
-  {
-    num: '02',
-    label: '02 / DEPLOY',
-    title: '智慧體部署',
-    body: '硬體進廠,模型落地。本地 GPU 伺服器接上你的資料源,RAG 索引你的 SOP、歷史記錄、機台規格。紅區資料永不離開工廠,綠區數據透過 ekkoee.com 儀表板遠端監控。',
-  },
-  {
-    num: '03',
-    label: '03 / EVOLVE',
-    title: '持續進化',
-    body: '智慧體上線後每天學習。新的異常、新的決策、新的流程都會餵回模型。每月一次校準,每季一次能力擴充。你的工廠,會愈用愈聰明。',
-  },
-];
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 // Parent orchestrates stagger; children fade+rise.
 const gridVariants = {
@@ -55,6 +28,8 @@ const cardVariants = {
 };
 
 export default function Process() {
+  const { t } = useI18n();
+  const STEPS = t.process.steps;
   return (
     <section
       id="process"
@@ -81,7 +56,7 @@ export default function Process() {
               animation: 'cpf-blink 2s ease-in-out infinite',
             }}
           />
-          <span>[ 02 / PROCESS ]</span>
+          <span>{t.process.tag}</span>
         </div>
 
         {/* headline */}
@@ -96,7 +71,7 @@ export default function Process() {
             lineHeight: 1.2,
           }}
         >
-          從一次訪談,到一座會思考的工廠
+          {t.process.headline}
         </h2>
 
         {/* three columns — stagger in on scroll */}
@@ -111,7 +86,12 @@ export default function Process() {
             <motion.article
               key={step.num}
               variants={cardVariants}
-              className="group relative bg-void p-8 md:p-10"
+              className="group relative bg-void"
+              style={{
+                // 三欄之間那條白線(gap-px bg-bone/10)與文字拉開一點距離,
+                // 桌機版水平 64px、垂直 56px,行動版稍收。
+                padding: 'clamp(40px, 5vw, 64px) clamp(48px, 5vw, 64px)',
+              }}
             >
               {/* number badge */}
               <div

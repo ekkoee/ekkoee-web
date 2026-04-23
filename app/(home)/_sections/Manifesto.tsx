@@ -1,11 +1,16 @@
+'use client';
+
 // =====================================================================
 // (home) / Manifesto - bg-void
-// T6: 100vh 置中單句大字(choice 2A)。繁中鎖定 copy:
+// T6: 100vh 置中單句大字。文案從 i18n 字典來,預設繁中:
 //     「所有的智慧,為了每個人每分每秒的自由。」
 // Comfortaa 撐 latin / punctuation,中文 glyph fallback 到 Noto Sans TC。
 // =====================================================================
 
+import { useI18n } from '@/lib/i18n/I18nProvider';
+
 export default function Manifesto() {
+  const { t } = useI18n();
   return (
     <section
       id="manifesto"
@@ -31,7 +36,7 @@ export default function Manifesto() {
             animation: 'cpf-blink 2s ease-in-out infinite',
           }}
         />
-        <span>[ 01 / MANIFESTO ]</span>
+        <span>{t.manifesto.tag}</span>
       </div>
 
       {/* The line */}
@@ -47,9 +52,9 @@ export default function Manifesto() {
           maxWidth: '18ch',
         }}
       >
-        所有的智慧,
+        {t.manifesto.lineA}
         <br />
-        為了每個人每分每秒的自由。
+        {t.manifesto.lineB}
       </h2>
     </section>
   );

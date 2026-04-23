@@ -1,8 +1,12 @@
+'use client';
+
 // =====================================================================
 // (home) / Trust - gradient bg-void → warm-gray
 // T8: 三帶信任 — RED(永不離廠)/ YELLOW(匿名上傳)/ GREEN(公開可雲端)
 // 復用舊 prototype 的 .trust-grid / .zone.* CSS(還在 globals.css 裡)。
 // =====================================================================
+
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 function LockSvg() {
   return (
@@ -23,6 +27,7 @@ function LockSvg() {
 }
 
 export default function Trust() {
+  const { t } = useI18n();
   return (
     <section
       id="trust"
@@ -49,7 +54,7 @@ export default function Trust() {
               animation: 'cpf-blink 2s ease-in-out infinite',
             }}
           />
-          <span>[ 03 / TRUST ]</span>
+          <span>{t.trust.tag}</span>
         </div>
 
         {/* headline */}
@@ -64,7 +69,7 @@ export default function Trust() {
             lineHeight: 1.2,
           }}
         >
-          三帶信任,一條邊界
+          {t.trust.headline}
         </h2>
 
         {/* three zones — reuse legacy .trust-grid / .zone.* styles */}
@@ -72,49 +77,46 @@ export default function Trust() {
           <div className="zone red">
             <div className="zone-tag">
               <span className="zone-tag-dot" />
-              RED ZONE
+              {t.trust.zoneRed}
             </div>
             <div className="lock-viz">
               <LockSvg />
             </div>
             <div className="zone-body">
-              <strong>配方、定價、財務模型。</strong>這些是你工廠的
-              護城河資料。永遠不上雲,甚至不碰網路。只由工廠地板上
-              那台本地 GPU 處理。
+              <strong>{t.trust.red.strong}</strong>
+              {t.trust.red.body}
             </div>
-            <div className="zone-promise">{'// never leaves premises'}</div>
+            <div className="zone-promise">{t.trust.red.promise}</div>
           </div>
 
           <div className="zone amb">
             <div className="zone-tag">
               <span className="zone-tag-dot" />
-              YELLOW ZONE
+              {t.trust.zoneYellow}
             </div>
             <div className="lock-viz">
               <LockSvg />
             </div>
             <div className="zone-body">
-              <strong>SOP、草稿合約、內部流程。</strong>敏感但非核心。
-              預設留在本地;需要同步時,匿名化、遮罩化,每個動作都
-              有稽核軌跡。
+              <strong>{t.trust.yellow.strong}</strong>
+              {t.trust.yellow.body}
             </div>
-            <div className="zone-promise">{'// anonymized before upload'}</div>
+            <div className="zone-promise">{t.trust.yellow.promise}</div>
           </div>
 
           <div className="zone grn">
             <div className="zone-tag">
               <span className="zone-tag-dot" />
-              GREEN ZONE
+              {t.trust.zoneGreen}
             </div>
             <div className="lock-viz">
               <LockSvg />
             </div>
             <div className="zone-body">
-              <strong>手冊、法規、公開資料。</strong>可自由雲端處理。
-              大模型的火力、零機密風險。Claude、GPT、前沿模型在這裡
-              為你工作 — 也只在這裡。
+              <strong>{t.trust.green.strong}</strong>
+              {t.trust.green.body}
             </div>
-            <div className="zone-promise">{'// cloud-processable'}</div>
+            <div className="zone-promise">{t.trust.green.promise}</div>
           </div>
         </div>
       </div>
