@@ -27,7 +27,21 @@ export default function Hero({ onPortalTrigger, portalMode, onSkip }: HeroProps)
     const check = () => {
       const hasCoarse = window.matchMedia('(pointer: coarse)').matches;
       const hasNoHover = window.matchMedia('(hover: none)').matches;
-      setIsMobile(hasCoarse && hasNoHover);
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // 低階裝置偵測:CPU 核心 ≤ 4 或 RAM ≤ 4GB,或超窄螢幕
+      // 這些裝置跑 Three.js 會卡到爆,直接落 fallback
+      const nav = navigator as Navigator & { deviceMemory?: number };
+      const lowCpu = (nav.hardwareConcurrency ?? 8) <= 4;
+      const lowMem = (nav.deviceMemory ?? 8) <= 4;
+      const narrowScreen = window.innerWidth < 768;
+
+      setIsMobile(
+        (hasCoarse && hasNoHover) ||
+          prefersReduced ||
+          (lowCpu && lowMem) ||
+          narrowScreen,
+      );
     };
     check();
     window.addEventListener('resize', check);

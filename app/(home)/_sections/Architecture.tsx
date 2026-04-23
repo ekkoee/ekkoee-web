@@ -56,7 +56,7 @@ export default function Architecture() {
     <section
       id="architecture"
       aria-label="ekkoee architecture"
-      className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden bg-void px-6 py-20 md:px-10"
+      className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden bg-void px-6 py-12 md:px-10 md:py-20"
     >
       <div className="mx-auto w-full max-w-[1200px]">
         <div
@@ -81,9 +81,9 @@ export default function Architecture() {
         </div>
 
         <h2
-          className="ekkoee-brand mb-10"
+          className="ekkoee-brand mb-6 md:mb-10"
           style={{
-            fontSize: 'clamp(1.75rem, 4.2vw, 3rem)',
+            fontSize: 'clamp(1.5rem, 4.2vw, 3rem)',
             color: C.cream,
             fontWeight: 700,
             letterSpacing: '-0.01em',
@@ -94,7 +94,67 @@ export default function Architecture() {
           <span style={{ color: C.green }}>{t.architecture.headlineB}</span>
         </h2>
 
+        {/* 手機版:垂直堆疊的節點清單(md 以下) */}
+        <div className="flex flex-col gap-3 md:hidden">
+          {NODES.map((n, idx) => (
+            <div key={n.id} className="flex flex-col gap-3">
+              <div
+                style={{
+                  border: `1px solid ${n.color}40`,
+                  background: 'rgba(17, 17, 20, 0.6)',
+                  padding: 16,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 14,
+                }}
+              >
+                <div
+                  style={{
+                    width: 40,
+                    height: 40,
+                    border: `2px solid ${n.color}`,
+                    background: C.bg,
+                    flexShrink: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <div style={{ width: 14, height: 14, background: n.color }} />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div
+                    style={{
+                      fontSize: 10,
+                      color: n.color,
+                      letterSpacing: '0.22em',
+                      textTransform: 'uppercase',
+                      marginBottom: 4,
+                    }}
+                  >
+                    {n.zone === 'red' ? t.architecture.zoneRed : n.zone === 'yellow' ? t.architecture.zoneYellow : t.architecture.zoneGreen}
+                  </div>
+                  <div style={{ fontSize: 13, color: C.cream, letterSpacing: '0.08em', lineHeight: 1.3 }}>
+                    {n.label}
+                  </div>
+                  <div style={{ fontSize: 10, color: C.dim, marginTop: 3 }}>
+                    {n.sub}
+                  </div>
+                </div>
+              </div>
+              {/* 連接線箭頭(最後一個節點不畫) */}
+              {idx < NODES.length - 1 && (
+                <div className="flex justify-center" aria-hidden>
+                  <span style={{ color: C.dim, fontSize: 14, lineHeight: 1 }}>↓</span>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* 桌面版:原本的 420px 絕對定位圖表(md 以上) */}
         <div
+          className="hidden md:block"
           style={{
             position: 'relative',
             height: 420,
@@ -164,7 +224,10 @@ export default function Architecture() {
           ))}
         </div>
 
-        <div style={{ marginTop: 24, fontSize: 12, color: C.olive, textAlign: 'center' }}>
+        <div
+          className="hidden md:block"
+          style={{ marginTop: 24, fontSize: 12, color: C.olive, textAlign: 'center' }}
+        >
           {t.architecture.hoverHint}
         </div>
       </div>

@@ -15,11 +15,11 @@ export default function Manifesto() {
     <section
       id="manifesto"
       aria-label="ekkoee manifesto"
-      className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden bg-void px-6 py-20"
+      className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden bg-void px-6 py-12 md:py-20"
     >
       {/* section tag — terminal style (live green dot + bracket + mono) */}
       <div
-        className="text-amber absolute left-10 top-14 flex items-center gap-3"
+        className="text-amber absolute left-4 top-10 flex items-center gap-3 md:left-10 md:top-14"
         style={{
           fontFamily: 'var(--font-mono)',
           fontSize: 11,

@@ -100,18 +100,20 @@ export default function CyberpunkFrame() {
           >
             {t.hud.wordmark}
           </Link>
-          <span className="pointer-events-none" style={{ color: 'rgba(235, 230, 215, 0.25)' }}>{'//'}</span>
-          <span className="pointer-events-none" style={{ color: 'rgba(255, 185, 56, 0.75)' }}>
+          {/* tagline + 分隔 // 在手機藏起來,避免頂 HUD 爆版 */}
+          <span className="pointer-events-none hidden sm:inline" style={{ color: 'rgba(235, 230, 215, 0.25)' }}>{'//'}</span>
+          <span className="pointer-events-none hidden sm:inline" style={{ color: 'rgba(255, 185, 56, 0.75)' }}>
             {t.hud.tagline}
           </span>
         </div>
-        <div className="flex items-center gap-3">
-          <span className="pointer-events-none">{t.hud.node}</span>
-          <span className="pointer-events-none" style={{ color: 'rgba(235, 230, 215, 0.25)' }}>
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* NODE 在手機藏起來,LangSwitcher + LOGIN 是主要入口 */}
+          <span className="pointer-events-none hidden md:inline">{t.hud.node}</span>
+          <span className="pointer-events-none hidden md:inline" style={{ color: 'rgba(235, 230, 215, 0.25)' }}>
             {'//'}
           </span>
           <LangSwitcher />
-          <span className="pointer-events-none" style={{ color: 'rgba(235, 230, 215, 0.25)' }}>
+          <span className="pointer-events-none hidden sm:inline" style={{ color: 'rgba(235, 230, 215, 0.25)' }}>
             {'//'}
           </span>
           <Link
@@ -143,14 +145,14 @@ export default function CyberpunkFrame() {
           color: 'rgba(235, 230, 215, 0.55)',
         }}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <span style={{ color: 'rgba(0, 255, 136, 0.75)' }}>{t.hud.sysLive}</span>
-          <span style={{ color: 'rgba(235, 230, 215, 0.25)' }}>{'//'}</span>
-          <span>{t.hud.agents}</span>
-          <span style={{ color: 'rgba(235, 230, 215, 0.25)' }}>{'//'}</span>
-          <span style={{ color: 'rgba(255, 185, 56, 0.75)' }}>{t.hud.warn}</span>
+          <span className="hidden sm:inline" style={{ color: 'rgba(235, 230, 215, 0.25)' }}>{'//'}</span>
+          <span className="hidden sm:inline">{t.hud.agents}</span>
+          <span className="hidden md:inline" style={{ color: 'rgba(235, 230, 215, 0.25)' }}>{'//'}</span>
+          <span className="hidden md:inline" style={{ color: 'rgba(255, 185, 56, 0.75)' }}>{t.hud.warn}</span>
         </div>
-        <div>
+        <div className="truncate" style={{ maxWidth: '55%' }}>
           <span>{t.hud.scrollHint}</span>
         </div>
       </div>

@@ -157,7 +157,11 @@ export default function HomeOrbit() {
         el.style.pointerEvents = i === roundedCurrent ? 'auto' : 'none';
         // 越靠近中心,疊在越上層,避免 Z-fighting
         el.style.zIndex = String(100 - Math.round(absDiff * 10));
-        el.style.visibility = absDiff < 1.2 ? 'visible' : 'hidden';
+        const isVisible = absDiff < 1.2;
+        el.style.visibility = isVisible ? 'visible' : 'hidden';
+        // content-visibility: 遠離視域時讓瀏覽器跳過 layout / paint,
+        // 可大幅降低背景 CPU 消耗(動畫、SVG、DOM 計算)
+        el.style.contentVisibility = isVisible ? 'visible' : 'hidden';
       }
 
       // Hero centerness CSS var — wordmark/hint 在 Hero.tsx 綁這個

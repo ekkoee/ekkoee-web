@@ -32,7 +32,7 @@ export default function Trust() {
     <section
       id="trust"
       aria-label="ekkoee trust boundaries"
-      className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-void to-warm-gray px-6 py-20 md:px-10"
+      className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-void to-warm-gray px-6 py-10 md:px-10 md:py-20"
     >
       <div className="mx-auto w-full max-w-[1200px]">
         {/* terminal label */}
@@ -59,12 +59,12 @@ export default function Trust() {
 
         {/* headline */}
         <h2
-          className="text-bone mb-12 max-w-[24ch]"
+          className="text-bone mb-6 max-w-[24ch] md:mb-12"
           style={{
             fontFamily:
               'var(--font-comfortaa), var(--font-sans), "Noto Sans TC", system-ui, sans-serif',
             fontWeight: 700,
-            fontSize: 'clamp(1.75rem, 4.2vw, 3.5rem)',
+            fontSize: 'clamp(1.5rem, 4.2vw, 3.5rem)',
             letterSpacing: '-0.01em',
             lineHeight: 1.2,
           }}

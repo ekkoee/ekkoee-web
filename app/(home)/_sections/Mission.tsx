@@ -15,7 +15,7 @@ export default function Mission() {
     <section
       id="mission"
       aria-label="ekkoee mission"
-      className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden bg-void px-6 py-20 md:px-10"
+      className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden bg-void px-6 py-12 md:px-10 md:py-20"
     >
       <div className="mx-auto w-full max-w-[1200px]">
         <div

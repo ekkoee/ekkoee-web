@@ -233,17 +233,16 @@ export default function CTA() {
           aria-expanded={showContacts}
           aria-controls="cta-contacts"
           onClick={() => setShowContacts((v) => !v)}
-          className="inline-flex items-center gap-3 transition-all"
+          className="inline-flex w-full max-w-[360px] items-center gap-3 transition-all"
           style={{
             border: '1px solid #BF4E6B',
-            padding: '18px 44px',
+            padding: '18px 28px',
             color: '#EBE6D7',
             background: '#BF4E6B',
             fontFamily: 'var(--font-mono)',
-            fontSize: 15,
+            fontSize: 14,
             letterSpacing: '0.1em',
             boxShadow: '0 0 0 rgba(191, 78, 107, 0)',
-            minWidth: 320,
             cursor: 'pointer',
           }}
           onMouseEnter={(e) => {

@@ -34,7 +34,7 @@ export default function Process() {
     <section
       id="process"
       aria-label="ekkoee process"
-      className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden bg-void px-6 py-20 md:px-10"
+      className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden bg-void px-6 py-12 md:px-10 md:py-20"
     >
       <div className="mx-auto w-full max-w-[1200px]">
         {/* section tag — terminal style */}
@@ -61,7 +61,7 @@ export default function Process() {
 
         {/* headline */}
         <h2
-          className="text-bone mb-20 max-w-[22ch]"
+          className="text-bone mb-8 max-w-[22ch] md:mb-20"
           style={{
             fontFamily:
               'var(--font-comfortaa), var(--font-sans), "Noto Sans TC", system-ui, sans-serif',
@@ -89,8 +89,8 @@ export default function Process() {
               className="group relative bg-void"
               style={{
                 // 三欄之間那條白線(gap-px bg-bone/10)與文字拉開一點距離,
-                // 桌機版水平 64px、垂直 56px,行動版稍收。
-                padding: 'clamp(40px, 5vw, 64px) clamp(48px, 5vw, 64px)',
+                // 桌機版水平 64px、垂直 56px,行動版收到 24/28px 讓 3 張卡能裝進 1 個 viewport。
+                padding: 'clamp(24px, 5vw, 64px) clamp(28px, 5vw, 64px)',
               }}
             >
               {/* number badge */}

@@ -87,7 +87,7 @@ export default function DashboardPreview() {
     <section
       id="dashboard"
       aria-label="ekkoee live dashboard preview"
-      className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden bg-warm-gray px-6 py-20 md:px-10"
+      className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden bg-warm-gray px-6 py-10 md:px-10 md:py-20"
     >
       <div className="mx-auto w-full max-w-[1200px]">
         {/* terminal label */}
@@ -114,12 +114,12 @@ export default function DashboardPreview() {
 
         {/* headline */}
         <h2
-          className="text-bone mb-10 max-w-[24ch]"
+          className="text-bone mb-6 max-w-[24ch] md:mb-10"
           style={{
             fontFamily:
               'var(--font-comfortaa), var(--font-sans), "Noto Sans TC", system-ui, sans-serif',
             fontWeight: 700,
-            fontSize: 'clamp(1.75rem, 4.2vw, 3.5rem)',
+            fontSize: 'clamp(1.5rem, 4.2vw, 3.5rem)',
             letterSpacing: '-0.01em',
             lineHeight: 1.2,
           }}
