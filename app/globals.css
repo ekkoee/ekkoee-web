@@ -1,16 +1,38 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-bg: #0a0a0c;
-  --color-bg-2: #121216;
-  --color-bg-3: #1a1a20;
-  --color-fg: #d4d4d4;
-  --color-green: #00ff88;
-  --color-amber: #ffb938;
-  --color-rose: #bf4e6b;
-  --color-danger: #ff3b5c;
-  --font-brand: var(--font-brand);
-  --font-mono: var(--font-mono);
+  /* ---- ekkoee canonical palette (brief-locked, 11 colors) ---- */
+  /* Tailwind utilities generated: bg-ink / text-bone / border-olive / etc. */
+  --color-ink:       #040410;  /* hero 深黑底 */
+  --color-void:      #0A0A0C;  /* bridge 黑 / Manifesto+Process 底 */
+  --color-bone:      #EBE6D7;  /* 主要前景文字 / 線條 */
+  --color-bone-dim:  #C4BFAE;  /* 次級前景 / 弱化文字 */
+  --color-olive:     #A29C87;  /* 品牌次色 / 分隔線 */
+  --color-cream:     #E6E2D3;  /* 降落底色 / CTA 底 */
+  --color-rose:      #BF4E6B;  /* 品牌主色 / CTA / Sri Yantra bindu */
+  --color-terminal:  #00FF88;  /* ** 僅限真實數據 ** */
+  --color-amber:     #FFB938;  /* 標籤 / 告警 / section tag */
+  --color-warm-gray: #1A1815;  /* dashboard 暖底 */
+
+  /* ---- hero v15 internal palette (4 bone 階 + orange dot),限 JSX 內部使用 ---- */
+  --color-bone-deep:  #736F63;
+  --color-bone-ghost: #3F3E38;
+  --color-orange-dot: #FF6A2A;
+
+  /* ---- back-compat (legacy ekkoee-prototype.html / 首批 section dev) ---- */
+  --color-green:  #00FF88;  /* alias for --color-terminal (legacy var(--green)) */
+  --color-bg:     #0A0A0C;
+  --color-bg-2:   #121216;
+  --color-bg-3:   #1A1A20;
+  --color-fg:     #D4D4D4;
+  --color-danger: #FF3B5C;
+
+  /* ---- fonts (piped from next/font via layout.tsx CSS vars) ---- */
+  --font-comfortaa: var(--font-comfortaa); /* wordmark / headline */
+  --font-mono:      var(--font-mono);      /* HUD / code / section tag */
+  --font-sans:      var(--font-sans);      /* body — Noto Sans TC 繁中 + latin fallback */
+  /* legacy alias for existing components still reading --font-brand */
+  --font-brand:     var(--font-comfortaa);
 }
 
 /* ===== Ported from ekkoee-prototype.html (lines 12-1069) ===== */
@@ -47,12 +69,8 @@
 
 html,
 body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: var(--font-mono), "JetBrains Mono", monospace;
-  font-weight: 300;
-  font-size: 15px;
-  line-height: 1.6;
+  /* base reset only. font-family / color / size live on components
+     so legacy prototype styles don't bleed into v15 orrery layout. */
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
@@ -60,6 +78,12 @@ body {
 body {
   min-height: 100vh;
   position: relative;
+  background: var(--color-void, #0a0a0c);
+  color: var(--color-bone, #ebe6d7);
+  font-family: var(--font-sans), "Noto Sans TC", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 /* ============ BACKGROUND LAYERS ============ */
@@ -192,18 +216,14 @@ body {
 
 /* ============ SECTION SHELL ============ */
 
-main { position: relative; z-index: 2; }
+/* Legacy global <section> / #hero tag rules REMOVED.
+   They forced every <section> into a 1200px-wide flex-centered box and
+   broke the scroll-pinned hero (caused the "middle band" bug). New
+   v15 sections control their own layout via Tailwind + inline styles.
+   Opt-in class-based rules below (.sec-label, .mission-*, etc.) stay
+   in place as dead code — they only activate if a component uses them. */
 
-section {
-  min-height: 100vh;
-  padding: 120px 40px 80px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+main { position: relative; z-index: 2; }
 
 .sec-label {
   font-family: var(--font-mono), "JetBrains Mono", monospace;
@@ -226,14 +246,10 @@ section {
   background: var(--amber-2);
 }
 
-/* ============ 01: HERO ============ */
+/* ============ 01: HERO (legacy prototype, inert — replaced by v15) ============ */
 
-#hero {
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding-top: 100px;
-}
+/* Legacy #hero block removed (forced flex-center/align-center/center-text
+   onto the new Hero section and overrode 600vh sticky layout). */
 
 .gear-logo {
   width: 160px;
@@ -1020,3 +1036,152 @@ section {
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
+
+/* ============================================================ */
+/* ============ V2 HOMEPAGE — HERMES CYBERPUNK ================ */
+/* ============================================================ */
+
+@theme {
+  --color-ekko-bg: #0A0A0C;
+  --color-ekko-bg-soft: #111114;
+  --color-ekko-bg-card: #15151A;
+  --color-ekko-line: #222228;
+  --color-ekko-line-hot: #2d2d35;
+  --color-ekko-green: #00FF88;
+  --color-ekko-amber: #FFB938;
+  --color-ekko-rose: #BF4E6B;
+  --color-ekko-olive: #A29C87;
+  --color-ekko-cream: #E6E2D3;
+  --color-ekko-dim: #5A5A64;
+  --color-ekko-text: #D4D4D8;
+}
+
+.ekkoee-root {
+  font-family: var(--font-mono), "JetBrains Mono", monospace;
+  color: #D4D4D8;
+  background: #0A0A0C;
+}
+
+.ekkoee-root * { box-sizing: border-box; }
+
+.ekkoee-brand {
+  font-family: var(--font-brand), "Comfortaa", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.ekkoee-mono {
+  font-family: var(--font-mono), "JetBrains Mono", monospace;
+}
+
+/* CRT scanlines */
+.ekkoee-scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 136, 0.02) 0px,
+    rgba(0, 255, 136, 0.02) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: overlay;
+}
+
+/* Subtle grain */
+.ekkoee-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 59;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* Vignette */
+.ekkoee-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 58;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+/* Scan sweep */
+.ekkoee-sweep {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 120px;
+  z-index: 55;
+  background: linear-gradient(180deg, transparent, rgba(0, 255, 136, 0.05) 50%, transparent);
+  pointer-events: none;
+  animation: ekkoee-sweep 8s linear infinite;
+}
+
+@keyframes ekkoee-sweep {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+/* Cursor crosshair for v2 root */
+.ekkoee-root,
+.ekkoee-root * { cursor: crosshair; }
+.ekkoee-root a,
+.ekkoee-root button,
+.ekkoee-root [role="button"] { cursor: pointer; }
+
+/* Blinking caret (renamed to ekkoee-blink to avoid clash with v1 blink keyframe) */
+@keyframes ekkoee-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+.ekkoee-caret { animation: ekkoee-blink 1s step-end infinite; }
+
+/* Glitch */
+@keyframes ekkoee-glitchShift {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-1px, 1px); }
+  40% { transform: translate(1px, -1px); }
+  60% { transform: translate(-1px, -1px); }
+  80% { transform: translate(1px, 1px); }
+}
+.ekkoee-glitch:hover { animation: ekkoee-glitchShift 0.3s linear infinite; }
+
+/* Fade up on reveal */
+.ekkoee-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.ekkoee-reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Data pulse */
+@keyframes ekkoee-datapulse {
+  0% { opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+.ekkoee-pulse { animation: ekkoee-datapulse 2s ease-in-out infinite; }
+
+/* Ticker marquee */
+@keyframes ekkoee-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Boot fade */
+@keyframes ekkoee-bootFadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; pointer-events: none; }
+}
+
+/* V2-specific selection + scrollbar (scoped to ekkoee-root) */
+.ekkoee-root ::selection { background: #00FF88; color: #0A0A0C; }
+.ekkoee-root ::-webkit-scrollbar { width: 6px; }
+.ekkoee-root ::-webkit-scrollbar-track { background: #0A0A0C; }
+.ekkoee-root ::-webkit-scrollbar-thumb { background: #00FF88; }

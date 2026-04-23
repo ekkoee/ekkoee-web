@@ -1,0 +1,87 @@
+'use client';
+
+// =====================================================================
+// ekkoee homepage v2 — main composition
+// ---------------------------------------------------------------------
+// Composes the HERMES cyberpunk terminal: boot gate, fullscreen overlays
+// (scanlines / grain / vignette / sweep), persistent HUD + progress rail,
+// and the six scrollable sections. An IntersectionObserver tracks the
+// active section for the rail and triggers .ekkoee-reveal animations.
+// =====================================================================
+
+import { useEffect, useState } from 'react';
+import BootSequence from '@/components/home/BootSequence';
+import CoordinateHUD from '@/components/home/CoordinateHUD';
+import ProgressRail, { type RailSection } from '@/components/home/ProgressRail';
+import Hero from '@/components/home/Hero';
+import Manifesto from '@/components/home/Manifesto';
+import LiveSystem from '@/components/home/LiveSystem';
+import Architecture from '@/components/home/Architecture';
+import Process from '@/components/home/Process';
+import Cta from '@/components/home/Cta';
+import Footer from '@/components/home/Footer';
+
+const SECTIONS: RailSection[] = [
+  { id: 'hero', label: 'SYSTEM' },
+  { id: 'manifesto', label: 'MANIFESTO' },
+  { id: 'live', label: 'LIVE' },
+  { id: 'architecture', label: 'ARCH' },
+  { id: 'process', label: 'PROCESS' },
+  { id: 'cta', label: 'CONNECT' },
+];
+
+export default function Home() {
+  const [booted, setBooted] = useState(false);
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    if (!booted) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const idx = SECTIONS.findIndex((s) => s.id === entry.target.id);
+          if (idx !== -1) setActive(idx);
+          entry.target.classList.add('visible');
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    SECTIONS.forEach((s) => {
+      const el = document.getElementById(s.id);
+      if (el) io.observe(el);
+    });
+
+    document.querySelectorAll('.ekkoee-reveal').forEach((el) => io.observe(el));
+
+    return () => io.disconnect();
+  }, [booted]);
+
+  return (
+    <div className="ekkoee-root" style={{ minHeight: '100vh' }}>
+      {!booted && <BootSequence onDone={() => setBooted(true)} />}
+
+      {/* fullscreen CRT overlays — pointer-events:none, painted above content */}
+      <div className="ekkoee-scanlines" />
+      <div className="ekkoee-grain" />
+      <div className="ekkoee-vignette" />
+      <div className="ekkoee-sweep" />
+
+      <CoordinateHUD />
+      <ProgressRail sections={SECTIONS} active={active} />
+
+      <main>
+        <Hero />
+        <Manifesto />
+        <LiveSystem />
+        <Architecture />
+        <Process />
+        <Cta />
+      </main>
+
+      <Footer />
+    </div>
+  );
+}

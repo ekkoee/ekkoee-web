@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# session debug / temp
+hero_debug.txt
+test_write_permissions.tmp
+
+# local agent/editor settings
+.claude/
