@@ -46,3 +46,10 @@ test_write_permissions.tmp
 
 # local agent/editor settings
 .claude/
+
+# External scratch / unpacked tarballs
+Downloads/
+
+# Local env
+.env.local
+.env*.local
