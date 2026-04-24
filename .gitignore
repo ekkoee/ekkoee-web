@@ -53,3 +53,7 @@ Downloads/
 # Local env
 .env.local
 .env*.local
+
+# …but keep the env template checked in (the broad .env* above would
+# otherwise ignore it)
+!.env.local.example

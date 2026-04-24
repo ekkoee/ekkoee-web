@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Comfortaa, JetBrains_Mono, Noto_Sans_TC } from "next/font/google";
 import { I18nProvider } from "@/lib/i18n/I18nProvider";
+import FloatingAgent from "@/components/FloatingAgent";
 import "./globals.css";
 
 // Display / wordmark - Comfortaa (geometric, rounded, sacred-orrery feel)
@@ -51,6 +52,7 @@ export default function RootLayout({
     >
       <body>
         <I18nProvider>{children}</I18nProvider>
+        <FloatingAgent />
       </body>
     </html>
   );
